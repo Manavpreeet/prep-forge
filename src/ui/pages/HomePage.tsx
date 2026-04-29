@@ -10,7 +10,7 @@ export function HomePage() {
   const progress = useProgress();
 
   return (
-    <div className="flex min-h-[calc(100vh-12rem)] flex-col items-center justify-center">
+    <div className="flex min-h-[calc(100vh-12rem)] flex-col items-center justify-center px-1 sm:px-0">
       <div className="mb-16 space-y-4 text-center">
         <h2 className="font-headline-xl text-headline-xl text-primary">Master Your Craft</h2>
         <p className="mx-auto max-w-lg font-body-lg text-stone-500">

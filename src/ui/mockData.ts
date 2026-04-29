@@ -46,6 +46,7 @@ type ArtifactQuestion = {
   url: string;
   tags: string[];
   estimatedMinutes: number;
+  paidOnly?: boolean;
   sourceMeta?: {
     acRate?: number;
     topicTagSlugs?: string[];
@@ -83,8 +84,8 @@ function toUiDifficulty(value: ArtifactQuestion["difficulty"]): Question["diffic
 }
 
 const artifactPatterns = patternsJson as ArtifactPattern[];
-const artifactQuestions = questionsJson as ArtifactQuestion[];
-const practiceQuestions = practiceQuestionsJson as ArtifactPracticeQuestion[];
+const artifactQuestions = (questionsJson as ArtifactQuestion[]).filter((q) => !q.paidOnly);
+const practiceQuestions = (practiceQuestionsJson as ArtifactPracticeQuestion[]).filter((q) => !q.paidOnly);
 const patternTagMap = patternTagMapJson as Record<string, string>;
 
 const patternPriority: Record<string, number> = {

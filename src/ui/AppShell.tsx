@@ -20,7 +20,7 @@ export function AppShell() {
   return (
     <div className="min-h-screen bg-surface text-on-surface">
       <header className="fixed top-0 z-50 w-full border-b border-stone-200/50 bg-stone-50/80 backdrop-blur-md shadow-sm dark:border-stone-800/50 dark:bg-stone-950/80">
-        <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-6 py-4">
+        <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-4 py-4 sm:px-6">
           <div className="flex items-center gap-4">
             {canGoBack ? (
               <button
@@ -82,7 +82,7 @@ export function AppShell() {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-[1200px] px-6 pb-8 pt-24">
+      <main className="mx-auto w-full max-w-[1200px] px-4 pb-8 pt-24 sm:px-6">
         <Outlet />
       </main>
     </div>
