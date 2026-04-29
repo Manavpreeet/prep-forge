@@ -2,6 +2,7 @@ import patternsJson from "../artifacts/patterns.json";
 import questionsJson from "../artifacts/questions.json";
 import practiceQuestionsJson from "../artifacts/practiceQuestions.json";
 import patternTagMapJson from "../artifacts/patternTagMap.json";
+import leetcodeRawQuestionsJson from "../artifacts/leetcodeRawQuestions.json";
 
 export type PatternId = string;
 
@@ -84,8 +85,22 @@ function toUiDifficulty(value: ArtifactQuestion["difficulty"]): Question["diffic
 }
 
 const artifactPatterns = patternsJson as ArtifactPattern[];
-const artifactQuestions = (questionsJson as ArtifactQuestion[]).filter((q) => !q.paidOnly);
-const practiceQuestions = (practiceQuestionsJson as ArtifactPracticeQuestion[]).filter((q) => !q.paidOnly);
+const leetcodeRawQuestions = leetcodeRawQuestionsJson as Array<{ titleSlug: string; isPaidOnly?: boolean }>;
+const paidOnlySlugSet = new Set(leetcodeRawQuestions.filter((q) => q.isPaidOnly).map((q) => q.titleSlug));
+
+function slugFromUrl(url: string): string | undefined {
+  const m = url.match(/leetcode\.com\/problems\/([^/]+)\//i);
+  return m?.[1];
+}
+
+function isPaidOnlyQuestion(q: Pick<ArtifactQuestion, "paidOnly" | "url">): boolean {
+  if (q.paidOnly) return true;
+  const slug = slugFromUrl(q.url);
+  return slug ? paidOnlySlugSet.has(slug) : false;
+}
+
+const artifactQuestions = (questionsJson as ArtifactQuestion[]).filter((q) => !isPaidOnlyQuestion(q));
+const practiceQuestions = (practiceQuestionsJson as ArtifactPracticeQuestion[]).filter((q) => !isPaidOnlyQuestion(q));
 const patternTagMap = patternTagMapJson as Record<string, string>;
 
 const patternPriority: Record<string, number> = {
