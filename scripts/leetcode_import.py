@@ -208,6 +208,8 @@ def build_artifacts(raw_questions: List[dict]) -> List[dict]:
     for q in raw_questions:
         tags = q.get("topicTags") or []
         tag_slugs = [t["slug"] for t in tags]
+        if "database" in tag_slugs or "sql" in tag_slugs:
+            continue
         mapped_pattern = map_pattern(tag_slugs, q.get("title", ""))
         diff = q.get("difficulty", "Medium")
 
