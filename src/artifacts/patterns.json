@@ -1,0 +1,86 @@
+[
+  {
+    "id": "arrays-hashing",
+    "name": "Arrays & Hashing",
+    "description": "Array operations, hash maps, and counting patterns.",
+    "order": 1,
+    "recommendedStartLevel": 1
+  },
+  {
+    "id": "two-pointers",
+    "name": "Two Pointers",
+    "description": "Dual pointer movement for sorted/sequence problems.",
+    "order": 2,
+    "recommendedStartLevel": 1
+  },
+  {
+    "id": "sliding-window",
+    "name": "Sliding Window",
+    "description": "Dynamic/fixed window over arrays or strings.",
+    "order": 3,
+    "recommendedStartLevel": 1
+  },
+  {
+    "id": "binary-search",
+    "name": "Binary Search",
+    "description": "Search space narrowing over ordered domains.",
+    "order": 4,
+    "recommendedStartLevel": 1
+  },
+  {
+    "id": "linked-list",
+    "name": "Linked List",
+    "description": "Traversal and manipulation of linked nodes.",
+    "order": 5,
+    "recommendedStartLevel": 1
+  },
+  {
+    "id": "trees",
+    "name": "Trees",
+    "description": "Tree traversals, recursion, and tree properties.",
+    "order": 6,
+    "recommendedStartLevel": 1
+  },
+  {
+    "id": "graphs",
+    "name": "Graphs",
+    "description": "Graph traversal, shortest path, and connectivity.",
+    "order": 7,
+    "recommendedStartLevel": 1
+  },
+  {
+    "id": "backtracking",
+    "name": "Backtracking",
+    "description": "State-space search with pruning.",
+    "order": 8,
+    "recommendedStartLevel": 1
+  },
+  {
+    "id": "dynamic-programming",
+    "name": "Dynamic Programming",
+    "description": "Optimal substructure with memo/tabulation.",
+    "order": 9,
+    "recommendedStartLevel": 1
+  },
+  {
+    "id": "greedy",
+    "name": "Greedy",
+    "description": "Locally optimal choices for global objective.",
+    "order": 10,
+    "recommendedStartLevel": 1
+  },
+  {
+    "id": "intervals",
+    "name": "Intervals",
+    "description": "Merge/sweep/overlap interval reasoning.",
+    "order": 11,
+    "recommendedStartLevel": 1
+  },
+  {
+    "id": "heap-priority-queue",
+    "name": "Heap / Priority Queue",
+    "description": "Top-k, streaming order statistics.",
+    "order": 12,
+    "recommendedStartLevel": 1
+  }
+]

@@ -1,0 +1,48 @@
+version: "3"
+
+tasks:
+  tasks:list:
+    desc: List all project tasks (with deps)
+    cmds:
+      - python3 scripts/tasks.py list
+
+  tasks:next:
+    desc: Show next runnable task (deps satisfied)
+    cmds:
+      - python3 scripts/tasks.py next
+
+  tasks:list:p1:
+    desc: List tasks for phase P1
+    cmds:
+      - python3 scripts/tasks.py list --phase P1
+
+  tasks:next:p1:
+    desc: Next runnable task in phase P1
+    cmds:
+      - python3 scripts/tasks.py next --phase P1
+
+  tasks:done:
+    desc: Mark a task done (usage: task tasks:done -- <task_id>)
+    cmds:
+      - python3 scripts/tasks.py done {{.CLI_ARGS}}
+
+  tasks:undone:
+    desc: Mark a task todo again (usage: task tasks:undone -- <task_id>)
+    cmds:
+      - python3 scripts/tasks.py undone {{.CLI_ARGS}}
+
+  tasks:graph:
+    desc: Output dependency graph in DOT format
+    cmds:
+      - python3 scripts/tasks.py graph {{.CLI_ARGS}}
+
+  data:leetcode:
+    desc: Fetch and map LeetCode problems into src/artifacts
+    cmds:
+      - python3 scripts/leetcode_import.py
+
+  data:leetcode:enrich:
+    desc: Enrich practice pool with LeetCode statement details
+    cmds:
+      - python3 scripts/leetcode_enrich_practice.py
+

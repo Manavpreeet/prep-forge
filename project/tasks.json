@@ -1,0 +1,172 @@
+{
+  "phases": [
+    {
+      "id": "P1",
+      "name": "MVP 1 — Core practice app",
+      "goal": "Pattern list, practice flow, local progress tracking, weakness + motivation basics."
+    },
+    {
+      "id": "P2",
+      "name": "MVP 2 — Adaptive progression",
+      "goal": "Pattern tree progression, reinforcement, review later, mastery score."
+    },
+    {
+      "id": "P3",
+      "name": "MVP 3 — Artifact helper (rule-based)",
+      "goal": "Static hints/explanations/common mistakes + rule-based answer builder."
+    },
+    {
+      "id": "P4",
+      "name": "MVP 4 — Local semantic search",
+      "goal": "Transformers.js embeddings + IndexedDB vector index + semantic retrieval."
+    },
+    {
+      "id": "P5",
+      "name": "MVP 5 — Distilled model pipeline",
+      "goal": "Offline Spider distillation, ONNX export/quantize, run locally in browser."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "repo.scaffold",
+      "phase": "P1",
+      "priority": "P0",
+      "description": "Scaffold React+Vite+TS app, Tailwind, routing, Zustand. Establish folder structure from brief.",
+      "depends_on": []
+    },
+    {
+      "id": "artifacts.seed",
+      "phase": "P1",
+      "priority": "P0",
+      "description": "Create initial `src/artifacts/` JSON files (patterns, questions, patternTrees, hints, explanations).",
+      "depends_on": ["repo.scaffold"]
+    },
+    {
+      "id": "storage.progress",
+      "phase": "P1",
+      "priority": "P0",
+      "description": "Implement localStorage progress repository + models (QuestionProgress, PatternProgress, UserProgress).",
+      "depends_on": ["repo.scaffold"]
+    },
+    {
+      "id": "engine.weakness",
+      "phase": "P1",
+      "priority": "P0",
+      "description": "Implement weakness scoring from local progress (attempt ratio, repeated fails, skips, fail-on-easy).",
+      "depends_on": ["storage.progress", "artifacts.seed"]
+    },
+    {
+      "id": "engine.selector",
+      "phase": "P1",
+      "priority": "P0",
+      "description": "Implement question selection for Pattern Practice + Random Practice with weak/in-progress/unexplored bias.",
+      "depends_on": ["engine.weakness", "artifacts.seed", "storage.progress"]
+    },
+    {
+      "id": "ui.shell",
+      "phase": "P1",
+      "priority": "P0",
+      "description": "Add app shell: layout, theme (dark-first), navigation routes (Home/Patterns/Practice/Progress).",
+      "depends_on": ["repo.scaffold"]
+    },
+    {
+      "id": "ui.patterns",
+      "phase": "P1",
+      "priority": "P0",
+      "description": "Implement Pattern Selection page with pattern cards, progress summary, continue actions.",
+      "depends_on": ["ui.shell", "storage.progress", "artifacts.seed"]
+    },
+    {
+      "id": "ui.practice",
+      "phase": "P1",
+      "priority": "P0",
+      "description": "Implement Practice page (question card, solved/unsolved/skip, hint button, 'why picked').",
+      "depends_on": ["ui.shell", "engine.selector", "storage.progress"]
+    },
+    {
+      "id": "ui.home",
+      "phase": "P1",
+      "priority": "P1",
+      "description": "Implement Home dashboard sections: continue, weak patterns, streak, start practice CTAs.",
+      "depends_on": ["ui.shell", "engine.weakness", "engine.selector", "storage.progress"]
+    },
+    {
+      "id": "ui.progress",
+      "phase": "P1",
+      "priority": "P1",
+      "description": "Implement Progress dashboard: totals, pattern-wise progress, weak/strong patterns, recent activity.",
+      "depends_on": ["ui.shell", "storage.progress", "engine.weakness"]
+    },
+    {
+      "id": "engine.motivation",
+      "phase": "P1",
+      "priority": "P2",
+      "description": "Implement motivation message selection based on recent outcomes (solve/fail/repeated fail/return).",
+      "depends_on": ["storage.progress"]
+    },
+    {
+      "id": "ui.motivation",
+      "phase": "P1",
+      "priority": "P2",
+      "description": "Add Motivation banner/empty states and integrate with motivation engine on practice flow.",
+      "depends_on": ["engine.motivation", "ui.practice"]
+    },
+    {
+      "id": "engine.patternTree",
+      "phase": "P2",
+      "priority": "P0",
+      "description": "Implement pattern tree progression (current node, onSolved/onFailed transitions).",
+      "depends_on": ["engine.selector", "storage.progress", "artifacts.seed"]
+    },
+    {
+      "id": "feature.reviewLater",
+      "phase": "P2",
+      "priority": "P1",
+      "description": "Add review-later list + UI + selection bias towards review-later followups.",
+      "depends_on": ["storage.progress", "ui.practice", "engine.selector"]
+    },
+    {
+      "id": "score.mastery",
+      "phase": "P2",
+      "priority": "P1",
+      "description": "Compute mastery score per pattern (blend solved/attempted, difficulty, recency).",
+      "depends_on": ["storage.progress", "engine.weakness"]
+    },
+    {
+      "id": "artifact.helper.ruleBased",
+      "phase": "P3",
+      "priority": "P0",
+      "description": "Implement rule-based helper that pulls from artifacts (hints/explanations/mistakes) with hint-first answers.",
+      "depends_on": ["artifacts.seed", "ui.practice"]
+    },
+    {
+      "id": "ai.embeddings",
+      "phase": "P4",
+      "priority": "P0",
+      "description": "Add Transformers.js embedding client + chunking strategy for artifacts.",
+      "depends_on": ["repo.scaffold", "artifacts.seed"]
+    },
+    {
+      "id": "ai.indexeddb",
+      "phase": "P4",
+      "priority": "P0",
+      "description": "Persist embeddings + semantic index in IndexedDB (idb).",
+      "depends_on": ["ai.embeddings"]
+    },
+    {
+      "id": "ai.semanticSearch",
+      "phase": "P4",
+      "priority": "P1",
+      "description": "Implement semantic search over wiki/artifacts; integrate into Ask Helper UI surface.",
+      "depends_on": ["ai.indexeddb"]
+    },
+    {
+      "id": "distill.spiderPipeline",
+      "phase": "P5",
+      "priority": "P2",
+      "description": "Offline: build Spider distillation pipeline + dataset formats + ONNX export + quantization plan.",
+      "depends_on": ["artifact.helper.ruleBased"]
+    }
+  ]
+}
+
