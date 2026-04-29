@@ -2,7 +2,7 @@ import patternsJson from "../artifacts/patterns.json";
 import questionsJson from "../artifacts/questions.json";
 import practiceQuestionsJson from "../artifacts/practiceQuestions.json";
 import patternTagMapJson from "../artifacts/patternTagMap.json";
-import leetcodeRawQuestionsJson from "../artifacts/leetcodeRawQuestions.json";
+import paidOnlySlugsJson from "../artifacts/paidOnlySlugs.json";
 
 export type PatternId = string;
 
@@ -85,8 +85,8 @@ function toUiDifficulty(value: ArtifactQuestion["difficulty"]): Question["diffic
 }
 
 const artifactPatterns = patternsJson as ArtifactPattern[];
-const leetcodeRawQuestions = leetcodeRawQuestionsJson as Array<{ titleSlug: string; isPaidOnly?: boolean }>;
-const paidOnlySlugSet = new Set(leetcodeRawQuestions.filter((q) => q.isPaidOnly).map((q) => q.titleSlug));
+const paidOnlySlugs = paidOnlySlugsJson as string[];
+const paidOnlySlugSet = new Set(paidOnlySlugs);
 
 function slugFromUrl(url: string): string | undefined {
   const m = url.match(/leetcode\.com\/problems\/([^/]+)\//i);
